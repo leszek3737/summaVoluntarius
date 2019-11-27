@@ -23,9 +23,14 @@ function sendMail(data) {
   var template = HtmlService.createTemplateFromFile(data.templateFile);
   template.data = data.template
   var html = template.evaluate().getBlob().getDataAsString();
-  GmailApp.sendEmail( data.mail, data.subject, "",    {
+  MailApp.sendEmail({
+    to: data.to,
+    cc: data.cc,
+    bcc: data.bcc,
     htmlBody: html,
-  } )
+    subject: data.subject,
+    attachments: data.attachments
+  })
 }
 //function dayInMiliSec(day){
 //  return 86400000 * day
